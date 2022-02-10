@@ -60,6 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: test failure
+        run: exit 1
       - name: Install latest beta
         uses: actions-rs/toolchain@v1
         with:
