@@ -239,7 +239,7 @@ jobs:
           
           echo "::set-output name=COLOR::$badge_color"
           
-      - name: Dynamic Badges
+      - name: Generate coverage badge
         uses: Schneegans/dynamic-badges-action@v1.1.0
         with:
           auth: ${{ secrets.CREATE_GIST_TOKEN }}
