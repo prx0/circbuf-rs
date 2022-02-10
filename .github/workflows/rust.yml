@@ -61,6 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: test failure
+        continue-on-error: true
         run: exit 1
       - name: Install latest beta
         uses: actions-rs/toolchain@v1
@@ -163,6 +164,7 @@ jobs:
   beta-tests:
     runs-on: ubuntu-latest
     needs: ['beta-build']
+    if: success()
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
