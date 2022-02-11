@@ -103,13 +103,31 @@ jobs:
           fi
           
           echo "::set-output name=COLOR::$badge_color"
-          
-      - name: Dynamic Badges
-        uses: Schneegans/dynamic-badges-action@v1.1.0
+
+      - name: Clover to ShieldsIO endpoint JSON
+          # You may pin to the exact commit or the version.
+          # uses: steffendietz/clover-to-shieldsio-json-action@4f73543dda469a37ed5d3c4b3b137bd4ff2e12bb
+        uses: steffendietz/clover-to-shieldsio-json-action@v1.0.1
         with:
-          auth: ${{ secrets.CREATE_GIST_TOKEN }}
-          gistID: 84fff83b81f73ee44837d2e538507cad
-          filename: circbuf-rs.coverage.json
-          label: coverage
-          message: "${{ steps.get_coverage.outputs.COVERAGE }}"
-          color: "${{ steps.get_badge_color.outputs.COLOR }}"
+          # Relative path from repository root to clover.xml
+          path-to-clover: ./ cobertura.xml/cobertura.xml
+          # Relative path from repository root where ShieldsIO endpoint JSON is created
+          path-to-json: shieldsio.json
+          # The left text of the badge; empty to omit left side
+          label-text: coverage
+          # The badge style
+          style: flat
+          # Below this coverage percent, the color will be bad-color
+          bad-threshold: 50
+          # Below this coverage percent, the color will be average-color
+          average-threshold: 75
+          # Below this coverage percent, the color will be above-average-color
+          above-average-threshold: 95
+          # The color used for bad code coverage
+          bad-color: red
+          # The color used for average code coverage
+          average-color: yellow
+          # The color used for above average code coverage
+          above-average-color: green
+          # The color used for good code coverage
+          good-color: brightgreen
