@@ -261,7 +261,7 @@ jobs:
         uses: steffendietz/clover-to-shieldsio-json-action@v1.0.1
         with:
           # Relative path from repository root to clover.xml
-          path-to-clover: ./ cobertura.xml/cobertura.xml
+          path-to-clover: ./cobertura.xml/cobertura.xml
           # Relative path from repository root where ShieldsIO endpoint JSON is created
           path-to-json: shieldsio.json
           # The left text of the badge; empty to omit left side
