@@ -1,6 +1,6 @@
 # CircBuf
 [![build status](https://github.com/prx0/circbuf-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/prx0/circbuf-rs/actions/workflows/rust.yml)
-![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/prx0/84fff83b81f73ee44837d2e538507cad/raw/circbuf-rs.coverage.json)
+[![codecov](https://codecov.io/gh/prx0/circbuf-rs/branch/master/graph/badge.svg?token=BVS0QOKZ7W)](https://codecov.io/gh/prx0/circbuf-rs)
 [![crates.io](https://img.shields.io/crates/v/circbuf.svg)](https://crates.io/crates/circbuf/)
 [![docs.rs](https://docs.rs/circbuf/badge.svg)](https://docs.rs/circbuf/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jeromefroe/circbuf-rs/master/LICENSE)
