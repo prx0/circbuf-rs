@@ -219,48 +219,8 @@ jobs:
         with:
           name: coverage
           path: cobertura.xml
-          
-      - name: Get coverage value
-        id: get_coverage
-        shell: bash
-        run: |
-          COV=$(sed -n '/line-rate=/{s/.*line-rate=//;s/ .*//;p;}' cobertura.xml/cobertura.xml) && COV=${COV:3:2}
-          echo "::set-output name=COVERAGE::$COV"
-      - name: Badge color
-        id: get_badge_color
-        shell: bash
-        run: |
-          COV=${{ steps.get_coverage.outputs.COVERAGE }}
-          BADGE_STYLE="flat"
-          BAD_THRESHOLD=50
-          AVERAGE_THRESHOLD=75
-          ABOVE_AVERAGE_THRESHOLD=90
 
-          BAD_COLOR="red"
-          AVERAGE_COLOR="yellow"
-          ABOVE_AVERAGE_COLOR="green"
-          GOOD_COLOR="brightgreen"
-
-          if (( $COV > $ABOVE_AVERAGE_THRESHOLD )); then
-            badge_color=$ABOVE_AVERAGE_COLOR
-          fi
-            
-          if (( $COV > $AVERAGE_THRESHOLD && $COV < $ABOVE_AVERAGE_THRESHOLD )); then
-            badge_color=$AVERAGE_COLOR
-          fi 
-
-          if (( $COV > $BAD_THRESHOLD && $COV < $AVERAGE_THRESHOLD || $COV < $BAD_THRESHOLD )); then
-            badge_color=$BAD_COLOR
-          fi
-          
-          echo "::set-output name=COLOR::$badge_color"
-          
-      - name: Generate coverage badge
-        uses: Schneegans/dynamic-badges-action@v1.1.0
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v1.0.2
         with:
-          auth: ${{ secrets.CREATE_GIST_TOKEN }}
-          gistID: 84fff83b81f73ee44837d2e538507cad
-          filename: circbuf-rs.coverage.json
-          label: coverage
-          message: "${{ steps.get_coverage.outputs.COVERAGE }}"
-          color: "${{ steps.get_badge_color.outputs.COLOR }}"
+          token: ${{secrets.CODECOV_TOKEN}}
