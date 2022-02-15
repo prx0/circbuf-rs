@@ -117,6 +117,7 @@ jobs:
           
   nightly-build:
     runs-on: ubuntu-latest
+    if: always()
     steps:
       - uses: actions/checkout@v2
       - name: Install latest nightly
@@ -142,6 +143,7 @@ jobs:
           
   beta-build:
     runs-on: ubuntu-latest
+    if: always()
     steps:
       - uses: actions/checkout@v2
       - name: Install latest beta
@@ -193,7 +195,7 @@ jobs:
   nightly-tests:
     runs-on: ubuntu-latest
     needs: ['nightly-build']
-    if: success()
+    if: always()
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -219,7 +221,7 @@ jobs:
   beta-tests:
     runs-on: ubuntu-latest
     needs: ['beta-build']
-    if: success()
+    if: always()
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -272,7 +274,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     needs: ["stable-tests"]
-    if: success()
+    if: always()
     steps:          
       - name: Run cargo-tarpaulin in release
         continue-on-error: true
